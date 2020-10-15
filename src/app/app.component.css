@@ -1,0 +1,97 @@
+:host {
+  font-family: Work Sans, Helvetica, sans-serif !important;
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 35px;
+  font-weight: bold;
+  margin: 8px 0;
+  color: #333;
+}
+
+h2 {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 8px 0;
+  color: #333;
+}
+
+p {
+  margin: 0;
+}
+
+.spacer {
+  flex: 1;
+}
+span {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.toolbar {
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: white;
+  color: white;
+  font-weight: 600;
+}
+.content {
+  display: grid;
+  margin-top: 70px;
+  margin-left: 10px;
+}
+
+.data-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+.index-data {
+  width: 500px;
+  grid-column: 1/2;
+  justify-items: start;
+  align-content: center;
+}
+
+.img-container {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  justify-items: end;
+}
+
+img {
+  width: 600px;
+}
+
+a,
+a:visited,
+a:hover {
+  color: #1976d2;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #125699;
+}
+
+@media (max-width: 900px) {
+  img {
+    width: 40px;
+  }
+}
