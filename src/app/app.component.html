@@ -21,10 +21,26 @@
 
 <div class="content" role="main">
   <!-- Resources -->
-  <h1>BITPANDA JUNIOR TEST</h1>
-  <h2>Fetched Index Data:</h2>
+  <h1>JUNIOR TEST</h1>
+  <h2>Fetched Indexes Data:</h2>
   <div class="data-container">
-    <div class="index-data" *ngFor="let item of items">{{ item }}</div>
+    <div *ngFor="let item of items" class="index-container">
+      <div class="index-logo">
+        <img class="logo-img" src="{{ item.logo }}" />
+      </div>
+      <div class="index-name">
+        <span>Name:</span>
+        {{ item.name }}
+      </div>
+      <div class="index-avgprice">
+        <span>Average Price:</span> {{ item.averagePrice }}
+      </div>
+      <div class="index-changes">
+        <span>Latest changes 24h:</span>
+        {{ item.changes24h }} {{ item.currency }}
+      </div>
+      <br /><br />
+    </div>
     <div class="img-container">
       <img
         class="bitpanda-bg-img"

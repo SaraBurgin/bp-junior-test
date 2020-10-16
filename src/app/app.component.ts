@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  inputs: ['items']
 })
 export class AppComponent {
   title = 'my-app';
@@ -16,21 +16,18 @@ export class AppComponent {
     this.http.get(this.url).toPromise().then(data => {
       // console.log(data);
 
+
       for (let attributes in data) {
         let dataAttributes = data[attributes];
-        // console.log(dataAttributes);
-
         let key = Object.keys(dataAttributes)[1];
-        // console.log(key);
-
         let val = Object.values(dataAttributes)[1];
-        // console.log(val);
 
         let cryptocoins = val['cryptocoins'];
         let commodities = val['commodities'];
         let fiats = val['fiats'];
         let indexes = val['indexes'];
         // console.log(indexes);
+
         indexes.forEach((index) => {
           let indexAttributes = index['attributes'];
           let keys = Object.keys(indexAttributes);
@@ -40,33 +37,40 @@ export class AppComponent {
           let name;
           let avgPrice;
           let changesAmount;
+          let fiatSymbol;
 
           for (var i = 0; i < keys.length; i++) {
-            if (keys[i] == 'logo') {
+            if (keys[i] === 'logo') {
               logo = values[i];
-              this.items.push(`Logo: ${values[i]}`);
+              // this.items.push({ logo: logo });
             }
-            if (keys[i] == 'name') {
+            if (keys[i] === 'name') {
               name = values[i];
-              this.items.push(`Name: ${values[i]}`);
+              // this.items.push({ name: name });
             }
-            if (keys[i] == 'avg_price') {
+            if (keys[i] === 'avg_price') {
               avgPrice = values[i];
-              this.items.push(`Average Price: ${values[i]}`);
+              // this.items.push({ averagePrice: avgPrice });
             }
             if (keys[i] == 'change_24h_amount') {
               changesAmount = values[i];
-              this.items.push(`Changes last 24h: ${values[i]}`);
+              // this.items.push({ changes24h: changesAmount });
             };
+            if (keys[i] == 'index_original_fiat_symbol') {
+              fiatSymbol = values[i];
+              // this.items.push({ currency: fiatSymbol });
+            }
           }
+          this.items.push({
+            logo: logo,
+            name: name,
+            averagePrice: avgPrice,
+            changes24h: changesAmount,
+            currency: fiatSymbol,
+          })
+          console.log(this.items);
         })
       }
-
-      /*for (let key in data) {
-        if (data.hasOwnProperty(key)) {
-          this.items.push(data[key]);
-        };
-      }*/
     });
   }
 }
