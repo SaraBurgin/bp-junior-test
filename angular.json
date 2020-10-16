@@ -117,8 +117,17 @@
               "devServerTarget": "my-app:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/my-app",
+            "netlifyToken": "-Y1_60s590FE3irv6I9bfcfMHZ3eJ6oskS84_rS6_3E",
+            "siteId": "0808f4dc-84ad-48bc-8106-bc70a0d415c7"
+          }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "my-app"
 }
