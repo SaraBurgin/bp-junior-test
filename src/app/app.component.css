@@ -31,7 +31,7 @@ p {
 .logo {
   width: 140px;
 }
-.logo-img {
+.index-logo-img {
   width: 50px;
 }
 span {
@@ -59,7 +59,16 @@ span {
   margin-top: 100px;
 }
 
-.data-container {
+/* CRYPTOCURRENCIES*/
+.crypto-container {
+  display: grid;
+  grid-template-columns: auto;
+}
+.crypto-logo-img {
+  width: 20px;
+}
+/* INDEX */
+.index-data-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -102,7 +111,7 @@ span {
 }
 
 img {
-  width: 600px;
+  width: 450px;
 }
 
 a,
