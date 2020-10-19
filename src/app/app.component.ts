@@ -110,7 +110,7 @@ export class AppComponent {
               avgPrice = values[i];
             }
             if (keys[i] === 'change_24h_amount') {
-              changesAmount = Math.ceil(parseInt(values[i]));
+              changesAmount = values[i];
             }
             percentage = changesAmount / (avgPrice - changesAmount);
             newPercentage = percentage.toFixed(3);
