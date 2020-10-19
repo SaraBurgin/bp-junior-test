@@ -5,19 +5,19 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  inputs: ['dataItems', 'cryptoItems']
+  inputs: ['cryptoItems', 'metalItems', 'indexItems']
 })
 export class AppComponent {
   title = 'my-app';
   url = `https://api.bitpanda.com/v1/masterdata`;
   cryptoItems = [];
-  dataItems = [];
+  metalItems = [];
+  indexItems = [];
 
 
   constructor(private http: HttpClient) {
     this.http.get(this.url).toPromise().then(data => {
       // console.log(data);
-
 
       for (let attributes in data) {
         let dataAttributes = data[attributes];
@@ -29,6 +29,8 @@ export class AppComponent {
         let fiats = val['fiats'];
         let indexes = val['indexes'];
 
+
+        // CRYPTOCURRENCIES
         cryptocoins.forEach((cryptocoin) => {
           let cryptocoinAttributes = cryptocoin['attributes'];
           let keys = Object.keys(cryptocoinAttributes);
@@ -36,10 +38,12 @@ export class AppComponent {
 
           let logo;
           let name;
+          let symbol;
           let color;
           let avgPrice;
           let changesAmount;
           let percentage;
+          let newPercentage;
 
           for (var i = 0; i < keys.length; i++) {
             if (keys[i] === 'logo') {
@@ -48,6 +52,9 @@ export class AppComponent {
             if (keys[i] === 'name') {
               name = values[i];
             }
+            if (keys[i] === 'symbol') {
+              symbol = values[i];
+            }
             if (keys[i] === 'color') {
               color = values[i];
             }
@@ -55,20 +62,70 @@ export class AppComponent {
               avgPrice = values[i];
             }
             if (keys[i] === 'change_24h_amount') {
-              changesAmount = values[i];
+              changesAmount = Math.ceil(values[i]);
             }
             percentage = changesAmount / (avgPrice - changesAmount);
+            newPercentage = percentage.toFixed(3);
           }
           this.cryptoItems.push({
             logo: logo,
             name: name,
+            symbol: symbol,
             color: color,
             averagePrice: avgPrice,
             changes24h: changesAmount,
-            percentage: percentage,
+            percentage: newPercentage,
+          })
+        });
+
+        // COMMODITIES -> METALS
+        commodities.forEach((metal) => {
+          let metalAttributes = metal['attributes'];
+          let keys = Object.keys(metalAttributes);
+          let values = Object.values(metalAttributes);
+
+          let logo;
+          let name;
+          let symbol;
+          let color;
+          let avgPrice;
+          let changesAmount;
+          let percentage;
+          let newPercentage;
+
+          for (var i = 0; i < keys.length; i++) {
+            if (keys[i] === 'logo') {
+              logo = values[i];
+            }
+            if (keys[i] === 'name') {
+              name = values[i];
+            }
+            if (keys[i] === 'symbol') {
+              symbol = values[i];
+            }
+            if (keys[i] === 'color') {
+              color = values[i];
+            }
+            if (keys[i] === 'avg_price') {
+              avgPrice = values[i];
+            }
+            if (keys[i] === 'change_24h_amount') {
+              changesAmount = Math.ceil(values[i]);
+            }
+            percentage = changesAmount / (avgPrice - changesAmount);
+            newPercentage = percentage.toFixed(3);
+          }
+          this.metalItems.push({
+            logo: logo,
+            name: name,
+            symbol: symbol,
+            color: color,
+            averagePrice: avgPrice,
+            changes24h: changesAmount,
+            percentage: newPercentage,
           })
         })
-
+        // INDEXES
         indexes.forEach((index) => {
           let indexAttributes = index['attributes'];
           let keys = Object.keys(indexAttributes);
@@ -83,40 +140,35 @@ export class AppComponent {
           for (var i = 0; i < keys.length; i++) {
             if (keys[i] === 'logo') {
               logo = values[i];
-              // this.dataItems.push({ logo: logo });
             }
             if (keys[i] === 'name') {
               name = values[i];
-              // this.dataItems.push({ name: name });
             }
             if (keys[i] === 'avg_price') {
               avgPrice = values[i];
-              // this.dataItems.push({ averagePrice: avgPrice });
             }
             if (keys[i] == 'change_24h_amount') {
               changesAmount = values[i];
-              // this.dataItems.push({ changes24h: changesAmount });
             };
             if (keys[i] == 'index_original_fiat_symbol') {
               fiatSymbol = values[i];
-              // this.dataItems.push({ currency: fiatSymbol });
             }
           }
-          this.dataItems.push({
+          this.indexItems.push({
             logo: logo,
             name: name,
             averagePrice: avgPrice,
             changes24h: changesAmount,
             currency: fiatSymbol,
           })
-          // console.log(this.dataItems);
         })
       }
-    });
+    })
   }
 }
+
 /* The above function: when our AppComponent is created it's going to immediatly request the data from our URL endpoint and then console.log it*/
 
 /* The reason to call toPromise is because get returns an observable so there is no real point in observing a get request. You are just getting the data once so you may as well turn it to a promise. */
 
-/* To show the values in JSON in our HTML we create an array dataItems, iterate over every key in data to make sure that that key is actually a real property of the data and push these dataItems to array */
+/* To show the values in JSON in our HTML we create an array indexItems, iterate over every key in data to make sure that that key is actually a real property of the data and push these indexItems to array */
