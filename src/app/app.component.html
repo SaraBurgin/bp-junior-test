@@ -69,21 +69,19 @@
   <!-- COMMODITIES - METALS -->
   <h2>Fetched Metals Data:</h2>
   <div class="metals-data-container">
-    <div *ngFor="let item of metalItems">
+    <div *ngFor="let item of metalItems" class="item-container">
       <div class="metal-logo">
         <img class="metal-logo-img" src="{{ item.logo }}" alt="metal-logo" />
       </div>
-      <div class="metal-name">
-        {{ item.name }}
-      </div>
-      <div class="metal-symbol">
-        {{ item.symbol }}
-      </div>
-      <div class="metal-avg-price">
-        {{ item.averagePrice }}
-      </div>
-      <div class="change-percentage">
-        {{ item.percentage }}
+      <div class="metal-txt" style="background: {{ item.color }}">
+        <div class="metal-name">
+          <span>{{ item.name }}</span>
+        </div>
+        <div class="metal-symbol">
+          {{ item.symbol }}
+        </div>
+        <div class="metal-avg-price">{{ item.averagePrice }}€</div>
+        <div class="change-percentage">{{ item.percentage }}%</div>
       </div>
     </div>
   </div>
