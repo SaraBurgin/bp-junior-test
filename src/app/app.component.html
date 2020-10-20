@@ -41,7 +41,7 @@
     <div
       *ngFor="let item of cryptoItems"
       class="crypto-container"
-      style="background: linear-gradient({{ item.color }}, #d3d3d3 140%)"
+      style="background: linear-gradient({{ item.color }}, #d3d3d3 135%)"
     >
       <div class="crypto-logo">
         <img
@@ -73,7 +73,10 @@
       <div class="metal-logo">
         <img class="metal-logo-img" src="{{ item.logo }}" alt="metal-logo" />
       </div>
-      <div class="metal-txt" style="background: {{ item.color }}">
+      <div
+        class="metal-txt"
+        style="background: linear-gradient({{ item.color }}, #d3d3d3 145%)"
+      >
         <div class="metal-name">
           <span>{{ item.name }}</span>
         </div>
@@ -85,7 +88,20 @@
       </div>
     </div>
   </div>
-
+  <!-- FIAT WALLET-->
+  <h2>Available Fiat Wallets</h2>
+  <p>At the moment the following Fiat Wallets are available:</p>
+  <br />
+  <div class="fiat-wallet-data">
+    <div *ngFor="let item of fiatItems" class="fiat-container">
+      <div class="fiat-name">
+        <span>{{ item.name }}</span>
+      </div>
+      <div class="minimum-withdraw">
+        Minimum withdraw: {{ item.minimumWithdraw }} {{ item.symbol }}
+      </div>
+    </div>
+  </div>
   <!-- INDEXES -->
   <h2>Fetched Indexes Data:</h2>
   <div class="index-and-img-container">

@@ -5,13 +5,14 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  inputs: ['cryptoItems', 'metalItems', 'indexItems']
+  inputs: ['cryptoItems', 'metalItems', 'fiatItems', 'indexItems']
 })
 export class AppComponent {
   title = 'my-app';
   url = `https://api.bitpanda.com/v1/masterdata`;
   cryptoItems = [];
   metalItems = [];
+  fiatItems = [];
   indexItems = [];
 
 
@@ -115,6 +116,7 @@ export class AppComponent {
             percentage = changesAmount / (avgPrice - changesAmount);
             newPercentage = percentage.toFixed(3);
           }
+
           this.metalItems.push({
             logo: logo,
             name: name,
@@ -125,6 +127,48 @@ export class AppComponent {
             percentage: newPercentage,
           })
         })
+
+        // FIAT ITEMS
+        fiats.forEach((fiat) => {
+          let fiatAttributes = fiat['attributes'];
+          let keys = Object.keys(fiatAttributes);
+          let values = Object.values(fiatAttributes);
+
+          let name;
+          let minWithdraw;
+          let newMinWithdraw;
+          let symbol;
+
+          for (var i = 0; i < keys.length; i++) {
+            if (keys[i] === 'name') {
+              if (values[i] === 'Australian dollar') {
+                return;
+              } else if (values[i] === 'Gold') {
+                return;
+              } else if (values[i] === 'Canadian dollar') {
+                return;
+              } else {
+                name = values[i];
+              }
+            }
+            if (keys[i] === 'min_withdraw_euro') {
+              minWithdraw = values[i];
+              newMinWithdraw = parseInt(minWithdraw).toFixed(2);
+            }
+            if (keys[i] === 'symbol_character') {
+              symbol = values[i];
+            }
+          }
+
+          this.fiatItems.push({
+            name: name,
+            minimumWithdraw: newMinWithdraw,
+            symbol: symbol,
+          })
+          console.log(this.fiatItems);
+
+        })
+
         // INDEXES
         indexes.forEach((index) => {
           let indexAttributes = index['attributes'];

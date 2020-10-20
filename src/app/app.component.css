@@ -124,6 +124,19 @@ a:hover {
   width: 50px;
 }
 
+/* FIAT */
+.fiat-wallet-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  padding: 10px;
+  border: 0.25px solid black;
+  border-radius: 5px;
+  justify-items: center;
+}
+.minimum-withdraw {
+  margin-left: 10px;
+}
 /* INDEX */
 .index-and-img-container {
   display: grid;
