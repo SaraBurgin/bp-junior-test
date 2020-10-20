@@ -20,13 +20,11 @@
 
 <div class="content" role="main">
   <div class="home-container">
-    <a href="https://account.bitpanda.com/en/overview">
-      <img
-        class="img-left"
-        alt="image-of-content"
-        src="assets/home-of-digital-assets.png"
-      />
-    </a>
+    <img
+      class="img-left"
+      alt="image-of-content"
+      src="assets/home-of-digital-assets.png"
+    />
     <img
       class="img-right"
       alt="bitpanda-on-devices"
@@ -66,6 +64,7 @@
       <br /><br />
     </div>
   </div>
+  <br />
   <!-- COMMODITIES - METALS -->
   <h2>Fetched Metals Data:</h2>
   <div class="metals-data-container">
@@ -88,12 +87,19 @@
       </div>
     </div>
   </div>
+  <br />
   <!-- FIAT WALLET-->
-  <h2>Available Fiat Wallets</h2>
-  <p>At the moment the following Fiat Wallets are available:</p>
+  <h2>Available Fiat Wallets:</h2>
+  <p>
+    In addition to euro, Bitpanda supports Swiss franc, British pound and US
+    dollar.
+  </p>
   <br />
   <div class="fiat-wallet-data">
-    <div *ngFor="let item of fiatItems" class="fiat-container">
+    <div class="logos-container" *ngFor="let item of fiatItems">
+      <img class="fiat-logo-img" alt="item-logo" src="{{ item.logo }}" />
+    </div>
+    <div class="fiat-container" *ngFor="let item of fiatItems">
       <div class="fiat-name">
         <span>{{ item.name }}</span>
       </div>
@@ -102,6 +108,7 @@
       </div>
     </div>
   </div>
+  <br />
   <!-- INDEXES -->
   <h2>Fetched Indexes Data:</h2>
   <div class="index-and-img-container">
@@ -126,7 +133,7 @@
     <div class="img-container">
       <img
         class="bitpanda-bg-img"
-        alt="mobile-background-img"
+        alt="mobile-img"
         src="assets/bitpanda_index.png"
       />
     </div>

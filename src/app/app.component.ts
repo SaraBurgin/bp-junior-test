@@ -135,6 +135,7 @@ export class AppComponent {
           let values = Object.values(fiatAttributes);
 
           let name;
+          let logo;
           let minWithdraw;
           let newMinWithdraw;
           let symbol;
@@ -151,6 +152,9 @@ export class AppComponent {
                 name = values[i];
               }
             }
+            if (keys[i] === 'logo_color') {
+              logo = values[i];
+            }
             if (keys[i] === 'min_withdraw_euro') {
               minWithdraw = values[i];
               newMinWithdraw = parseInt(minWithdraw).toFixed(2);
@@ -162,6 +166,7 @@ export class AppComponent {
 
           this.fiatItems.push({
             name: name,
+            logo: logo,
             minimumWithdraw: newMinWithdraw,
             symbol: symbol,
           })
