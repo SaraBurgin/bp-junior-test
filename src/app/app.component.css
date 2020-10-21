@@ -69,7 +69,7 @@ a:hover {
 @media (max-width: 499px) {
   .github-logo {
     position: absolute;
-    right: -100px;
+    right: -90px;
   }
 }
 .content {
@@ -144,6 +144,11 @@ a:hover {
 }
 .crypto-symbol {
   padding-left: 10px;
+}
+.crypto-percentage {
+  display: grid;
+  grid-template-columns: 1.75fr 1fr;
+  font-weight: bold;
 }
 
 /* MEDIA QUERIES - CRYPTOCURRENCIES */
@@ -262,10 +267,6 @@ a:hover {
   align-items: start;
 }
 
-.index-container {
-  width: 400px;
-}
-
 .index-logo {
   margin-left: 85px;
 }
@@ -278,7 +279,7 @@ a:hover {
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   justify-items: start;
-  width: 500px;
+  /* width: 500px; */
 }
 
 /* MEDIA QUERIES - INDEX */
@@ -290,16 +291,36 @@ a:hover {
 @media (max-width: 735px) {
   .index-and-img-container {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-auto-rows: 1fr 1fr;
-    justify-self: center;
+    /* grid-template-columns: 1fr;
+    grid-auto-rows: 1fr 1fr; */
     margin-bottom: 25px;
+  }
+  .index-data-container {
+    justify-items: center;
   }
   .index-container {
     margin-bottom: 20px;
+    /* width: 250px; */
   }
   .img-container {
-    width: 125px;
     margin-left: 0;
   }
 }
+@media (max-width: 675px) {
+  .bitpanda-bg-img {
+    width: 300px;
+  }
+  .img-container {
+    justify-self: end;
+    align-self: center;
+  }
+  .index-container {
+    font-size: 7px;
+  }
+  .index-container span {
+    font-size: 9px;
+  }
+  .index-logo {
+    margin-left: 50px;
+  }
+} ;

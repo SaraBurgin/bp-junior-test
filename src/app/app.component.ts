@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  inputs: ['cryptoItems', 'metalItems', 'fiatItems', 'indexItems']
+  inputs: ['cryptoItems', 'metalItems', 'fiatItems', 'indexItems'],
 })
 export class AppComponent {
   title = 'my-app';
@@ -15,10 +15,8 @@ export class AppComponent {
   fiatItems = [];
   indexItems = [];
 
-
   constructor(private http: HttpClient) {
     this.http.get(this.url).toPromise().then(data => {
-      // console.log(data);
 
       for (let attributes in data) {
         let dataAttributes = data[attributes];
@@ -46,6 +44,7 @@ export class AppComponent {
           let percentage;
           let newPercentage;
 
+
           for (var i = 0; i < keys.length; i++) {
             if (keys[i] === 'logo') {
               logo = values[i];
@@ -65,7 +64,7 @@ export class AppComponent {
             if (keys[i] === 'change_24h_amount') {
               changesAmount = (values[i]);
             }
-            percentage = changesAmount / (avgPrice - changesAmount);
+            percentage = Math.abs(changesAmount) / avgPrice;
             newPercentage = percentage.toFixed(3);
           }
           this.cryptoItems.push({
@@ -113,7 +112,7 @@ export class AppComponent {
             if (keys[i] === 'change_24h_amount') {
               changesAmount = values[i];
             }
-            percentage = changesAmount / (avgPrice - changesAmount);
+            percentage = Math.abs(changesAmount) / avgPrice;
             newPercentage = percentage.toFixed(3);
           }
 
@@ -170,8 +169,6 @@ export class AppComponent {
             minimumWithdraw: newMinWithdraw,
             symbol: symbol,
           })
-          console.log(this.fiatItems);
-
         })
 
         // INDEXES
@@ -216,8 +213,8 @@ export class AppComponent {
   }
 }
 
-/* The above function: when our AppComponent is created it's going to immediatly request the data from our URL endpoint and then console.log it*/
+/* When our AppComponent is created it's going to immediatly request the data from our URL endpoint.*/
 
 /* The reason to call toPromise is because get returns an observable so there is no real point in observing a get request. You are just getting the data once so you may as well turn it to a promise. */
 
-/* To show the values in JSON in our HTML we create an array indexItems, iterate over every key in data to make sure that that key is actually a real property of the data and push these indexItems to array */
+/* To show the values in JSON in our HTML we create an array, iterate over every key in data to make sure that that key is actually a real property of the data and push these items to our array */
